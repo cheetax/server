@@ -18,6 +18,6 @@ app.use(cookieParser())
 
 app.use('/users', users)
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('OK! Server started')
 })
