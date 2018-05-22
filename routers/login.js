@@ -6,8 +6,10 @@ router.get('/', (req, res) => {
     if (!req.session.val) req.session.val = 0
     //window.postMessage({sender: 'iframeName'}, '*')
     //res.json({status: 'User OK!'})
-    res.cookie('login', true,)
-    req.session.login = true;
+    //res.cookie = req.session.cookie;
+    //res.cookie()
+    res.cookie('id', req.sessionID);
+    //res.send('gfgfg')
     res.redirect('back');
 })
 
