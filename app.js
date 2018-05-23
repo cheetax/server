@@ -10,8 +10,6 @@ var login = require('./routers/login')
 
 var app = express();
 
-
-
 //app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -32,14 +30,15 @@ app.use(expressSession({
 //     next();
 // })
 var corsOptions = {
-    origin: 'http://localhost:3001/users',
+    origin: 'http://localhost:3000',
+    credentials: true,
     //origin: true,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
   
 app.use(cors(corsOptions));
 
-app.use('/users', cors(corsOptions), users)
+app.use('/users', users)
 app.use('/login', login)
 
 app.listen(3001, () => {
