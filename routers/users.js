@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
     // res.header({
     //     'Content-Type': "application/json",
     // }) 
-    res.header('Access-Control-Allow-Origin','http://localhost:3000/');
+    //res.header('Access-Control-Allow-Origin','http://localhost:3000/');
     var json = JSON.stringify({ status: 'User NOT login!' })
     res.status(200).json({ status: 'User NOT login!' })
 })
