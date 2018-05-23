@@ -15,7 +15,6 @@ var app = express();
 //app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors());
 //app.use(cookieSession({name: 'react', keys: 'kdfbidfbvierv'}))
 app.use(cookieParser())
 app.use(expressSession({
@@ -28,8 +27,18 @@ app.use(expressSession({
         httpOnly: true
     }
 }))
+// app.use('*', (req, res, next) => {
+//     console.log(res)
+//     next();
+// })
+var corsOptions = {
+    origin: 'http://localhost',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+  
+app.use(cors(corsOptions));
 
-app.use('/users', users)
+app.use('/users', cors(corsOptions), users)
 app.use('/login', login)
 
 app.listen(3001, () => {
