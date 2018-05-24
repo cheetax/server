@@ -29,13 +29,20 @@ app.use(expressSession({
 //     console.log(res)
 //     next();
 // })
+
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: (origin, callback) => {
+        callback(null, origin)
+    },
+    //origin: 'http://localhost:3000',
     credentials: true,
-    //origin: true,
-    //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+
 }
-  
+// var corsOptions = {
+//     //origin: req.headers.referer,
+//     origin: 'http://localhost:3000',
+//     credentials: true,
+// } 
 app.use(cors(corsOptions));
 
 app.use('/users', users)
