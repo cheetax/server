@@ -10,10 +10,8 @@ var login = require('./routers/login')
 
 var app = express();
 
-//app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-//app.use(cookieSession({name: 'react', keys: 'kdfbidfbvierv'}))
 app.use(cookieParser())
 app.use(expressSession({
     secret: 'dsvsdvsdvdsvd',
@@ -25,24 +23,15 @@ app.use(expressSession({
         httpOnly: true
     }
 }))
-// app.use('*', (req, res, next) => {
-//     console.log(res)
-//     next();
-// })
 
 var corsOptions = {
     origin: (origin, callback) => {
         callback(null, origin)
     },
-    //origin: 'http://localhost:3000',
     credentials: true,
 
 }
-// var corsOptions = {
-//     //origin: req.headers.referer,
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-// } 
+
 app.use(cors(corsOptions));
 
 app.use('/users', users)
