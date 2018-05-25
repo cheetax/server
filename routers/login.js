@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    if (req.session.isAuthorized) res.json({ status: 'User is login!' })
-    else res.json({ status: 'User NOT login!' })
+    if (req.session.isAuthorized) res.json({ status: true })
+    else res.json({ status: false })
 })
 
 module.exports = router
