@@ -1,8 +1,11 @@
 var express = require('express'),
     router = express.Router();
 
+const uid = () => "id" + Math.random().toString(16).slice(2);
+
 var users = [
     {
+        id: uid(),
         firstName: 'Дмитрий',
         surName: 'Гребенев',
         post: 'Начальник службы',
@@ -15,6 +18,7 @@ var users = [
         ]
     },
     {
+        id: uid(),
         firstName: 'Михаил',
         surName: 'Стариков',
         post: 'Ведущий специалист',
@@ -34,9 +38,66 @@ var users = [
 //     { name: 'Ivan' }
 // ]
 
+router.get('/', (req, res) => {
+    console.log(req.session);
+    var response = {
+        status: true,
+        users: users,
+        newUser: {},
+    };
+    if (req.session.isAuthorized) res.json(response);
+    else res.json({ status: false });
+})
+
 router.post('/', (req, res) => {
-    console.log(req.session)
-    if (req.session.isAuthorized) res.json(users)
+
+    if (req.session.isAuthorized) {
+        var user = req.body;
+        user.id = uid();
+        users.push(user);
+        var response = {
+            status: true,
+            users: users,
+            newUser: user,
+        }
+        res.json(response)
+    }
+
+    else res.json({ status: false })
+})
+
+router.put('/', (req, res) => {
+
+    if (req.session.isAuthorized) {
+        var user = req.body;
+        users = users.map(item => {
+            if (item.id !== user.id) return item;
+            else return user;
+        })
+        var response = {
+            status: true,
+            users: users,
+            newUser: user,
+        }
+        res.json(response)
+    }
+
+    else res.json({ status: false })
+})
+
+router.delete('/', (req, res) => {
+
+    if (req.session.isAuthorized) {
+        var user = req.body;
+        users = users.filter(item => item.id !== user.id);
+        var response = {
+            status: true,
+            users: users,
+            newUser: {},
+        }
+        res.json(response)
+    }
+
     else res.json({ status: false })
 })
 
