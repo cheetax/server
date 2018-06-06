@@ -7,6 +7,7 @@ var cors = require('cors')
 
 var users = require('./routers/users')
 var login = require('./routers/login')
+var roles = require('./routers/roles')
 
 var app = express();
 
@@ -35,6 +36,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/users', users)
+app.use('/roles', roles)
 app.use('/login', login)
 
 app.listen(3001, () => {
