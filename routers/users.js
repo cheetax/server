@@ -35,7 +35,6 @@ var users = [
 
 
 var user = (i) => {
-    var _user = Object.create(null);
     var _id = uid();
     _user = {
         id: _id,
@@ -54,7 +53,7 @@ var user = (i) => {
 }
 
 var setUsers = () => {
-    for (var i = 0; i <= 150000; i++) {
+    for (var i = 0; i <= 15000; i++) {
         users.push(user(i));
     }
     console.log(users)
