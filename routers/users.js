@@ -31,6 +31,37 @@ var users = [
     },
 ]
 
+
+
+
+var user = (i) => {
+    var _user = Object.create(null);
+    var _id = uid();
+    _user = {
+        id: _id,
+        firstName: 'Дмитрий',
+        surName: 'Гребенев' + i,
+        post: 'Начальник службы',
+        email: 'dmitriy.grebenev@gmail.com',
+        office: 'корпус 504 комната 248',
+        phone: '52112',
+        roles: [
+            'Администратор',
+            'Заказчик'
+        ]
+    }
+    return _user;
+}
+
+var setUsers = () => {
+    for (var i = 0; i <= 150000; i++) {
+        users.push(user(i));
+    }
+    console.log(users)
+};
+
+setUsers();
+
 // var users = [    
 //     { name: 'Dmitriy' },
 //     { name: 'Dmitriy' },
