@@ -53,7 +53,7 @@ var user = (i) => {
 }
 
 var setUsers = () => {
-    for (var i = 0; i <= 15000; i++) {
+    for (var i = 0; i <= 150000; i++) {
         users.push(user(i));
     }
     console.log(users)
