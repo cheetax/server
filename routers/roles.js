@@ -1,10 +1,24 @@
 var express = require('express'),
     router = express.Router();
 
+var rolesID = {
+    administrator: 'administrator' ,
+    customer: 'customer' ,
+    stockman: 'stockman'
+}    
 var roles = {
-    administrator: 'Администратор',
-    customer:  'Заказчик',
-    stockman: 'Кладовщик',
+    administrator: {
+        id: rolesID.administrator,
+        name: 'Администратор'
+    },
+    customer: {
+        id: rolesID.customer,
+        name: 'Заказчик'
+    },
+    stockman: {
+        id: rolesID.stockman,
+        name: 'Кладовщик'
+    },
 }
 
 router.get('/', (req, res) => {
@@ -17,4 +31,7 @@ router.get('/', (req, res) => {
     else res.json({ status: false });
 })
 
-module.exports = router
+module.exports = {
+    router,
+    roles
+};

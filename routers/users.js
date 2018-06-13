@@ -1,5 +1,6 @@
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    roles = require('./roles').roles;
 
 const uid = () => "id" + Math.random().toString(16).slice(2);
 
@@ -13,8 +14,8 @@ var users = [
         office: 'корпус 504 комната 248',
         phone: '52112',
         roles: [
-            'Администратор',
-            'Заказчик'
+            roles.administrator.id,
+            roles.customer.id
         ]
     },
     {
@@ -26,7 +27,7 @@ var users = [
         office: 'корпус 504 комната 248',
         phone: '52111',
         roles: [
-            'Заказчик'
+            roles.customer.id
         ]
     },
 ]
@@ -45,15 +46,15 @@ var user = (i) => {
         office: 'корпус 504 комната 248',
         phone: '52112',
         roles: [
-            'Администратор',
-            'Заказчик'
+            roles.administrator.id,
+            roles.customer.id
         ]
     }
     return _user;
 }
 
 var setUsers = () => {
-    for (var i = 0; i <= 150000; i++) {
+    for (var i = 0; i <= 15000; i++) {
         users.push(user(i));
     }
     console.log(users)

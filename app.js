@@ -7,7 +7,7 @@ var cors = require('cors')
 
 var users = require('./routers/users')
 var login = require('./routers/login')
-var roles = require('./routers/roles')
+var roles = require('./routers/roles').router
 
 var app = express();
 
