@@ -13,6 +13,8 @@ var users = [
         email: 'dmitriy.grebenev@gmail.com',
         office: 'корпус 504 комната 248',
         phone: '52112',
+        usePassword: false,
+        password: null,
         roles: [
             roles.administrator.id,
             roles.customer.id
@@ -25,7 +27,9 @@ var users = [
         post: 'Ведущий специалист',
         email: 'mikhail.starikov@gmail.com',
         office: 'корпус 504 комната 248',
-        phone: '52111',
+        phone: '52111',        
+        usePassword: false,
+        password: '',
         roles: [
             roles.customer.id
         ]
@@ -45,6 +49,8 @@ var user = (i) => {
         email: 'dmitriy.grebenev@gmail.com',
         office: 'корпус 504 комната 248',
         phone: '52112',
+        usePassword: false,
+        password: '',
         roles: [
             roles.administrator.id,
             roles.customer.id
