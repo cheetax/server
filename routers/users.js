@@ -16,14 +16,14 @@ var authUser = (user) => {
         var findUser = findUsers[0];
         var _salts = salts.filter(itemSalt => itemSalt.id == findUser.id);
         if (_salts.length == 0) {
-            return false;
+            return null;
         }
         else salt = _salts[0].salt;
         var password = pbkdf2.pbkdf2Sync(user.password, salt, 1000, 32, 'sha256').toString();
-        if (findUser.password === password) return true
-        else return false;
+        if (findUser.password === password) return findUser;
+        else return null;
     }
-    else return false;
+    else return null;
 }
 
 (() => {

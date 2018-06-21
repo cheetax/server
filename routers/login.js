@@ -9,9 +9,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    req.session.isAuthorized = authUser(req.body)
-    if (req.session.isAuthorized) res.json({ status: true })
-    else res.json({ status: false })
+    var user = null;
+    if (!req.session.isAuthorized) {
+        user = authUser(req.body);
+        req.session.isAuthorized = user !== null;
+        req.session.user = user;
+    }
+    res.json({ status: req.session.isAuthorized, user: req.session.user })
 })
 
 module.exports = router
