@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser')
 var cookieSession = require('cookie-session')
 var cors = require('cors')
 
-var users = require('./routers/users')
+var users = require('./routers/users').router
 var login = require('./routers/login')
 var roles = require('./routers/roles').router
 
@@ -21,7 +21,7 @@ app.use(expressSession({
     cookie: {
         name: 'react',
         secret: 'dsvsdvsdvdsvd',
-        httpOnly: true
+        httpOnly: false,
     }
 }))
 

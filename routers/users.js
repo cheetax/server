@@ -10,6 +10,22 @@ const uid = () => "id" + Math.random().toString(16).slice(2);
 var salts = [];
 var users = [];
 
+var authUser = (user) => {
+    var findUsers = users.filter(item => item.email === user.login)
+    if (findUsers.length > 0) {
+        var findUser = findUsers[0];
+        var _salts = salts.filter(itemSalt => itemSalt.id == findUser.id);
+        if (_salts.length == 0) {
+            return false;
+        }
+        else salt = _salts[0].salt;
+        var password = pbkdf2.pbkdf2Sync(user.password, salt, 1000, 32, 'sha256').toString();
+        if (findUser.password === password) return true
+        else return false;
+    }
+    else return false;
+}
+
 (() => {
     var _user = {};
     _user = {
@@ -20,7 +36,7 @@ var users = [];
         email: 'dmitriy.grebenev@gmail.com',
         office: 'корпус 504 комната 248',
         phone: '52112',
-        usePassword: false,
+        usePassword: true,
         password: '',
         salt: '',
         roles: [
@@ -28,6 +44,12 @@ var users = [];
             roles.customer.id
         ]
     }
+    var salt = crypto.randomBytes(32)
+    salts.push({
+        id: _user.id,
+        salt: salt,
+    })
+    _user.password = pbkdf2.pbkdf2Sync('1234', salt, 1000, 32, 'sha256').toString();
     // salts.push({
     //     id: _user.id,
     //     salt: crypto.randomBytes(32)
@@ -62,7 +84,7 @@ var user = (i) => {
         firstName: 'Дмитрий',
         surName: 'Гребенев' + i,
         post: 'Начальник службы',
-        email: 'dmitriy.grebenev@gmail.com',
+        email: 'dmitriy.grebenev1@gmail.com',
         office: 'корпус 504 комната 248',
         phone: '52112',
         usePassword: false,
@@ -157,11 +179,11 @@ router.put('/', (req, res) => {
                         else salt = _salts[0].salt;
 
                         //var pass = pbkdf2.pbkdf2Sync(user.password, salt, 1000, 32, 'sha256').toString()                      
-                        
+
                         user.password = pbkdf2.pbkdf2Sync(user.password, salt, 1000, 32, 'sha256').toString();
                     }
                     else {
-                        
+
                     }
                 }
                 return user;
@@ -194,4 +216,7 @@ router.delete('/', (req, res) => {
     else res.json({ status: false })
 })
 
-module.exports = router
+module.exports = {
+    router,
+    authUser
+}
