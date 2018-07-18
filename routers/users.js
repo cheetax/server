@@ -119,7 +119,7 @@ setUsers();
 // ]
 
 router.get('/', (req, res) => {
-    console.log(req.session);
+    //console.log(req.session);
     var response = {
         status: true,
         users: users,

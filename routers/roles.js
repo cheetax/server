@@ -22,7 +22,7 @@ var roles = {
 }
 
 router.get('/', (req, res) => {
-    console.log(req.session);
+    //console.log(req.session);
     var response = {
         status: true,
         roles: roles,

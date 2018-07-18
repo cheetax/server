@@ -3,7 +3,7 @@ var express = require('express'),
 var authUser = require('./users').authUser
 
 router.get('/', (req, res) => {
-    console.log(req.session)
+    //console.log(req.session)
     //req.session.isAuthorized = true
     res.redirect('back');
 })
