@@ -7,6 +7,7 @@ var cors = require('cors')
 
 var users = require('./routers/users').router
 var login = require('./routers/login')
+var logout = require('./routers/logout')
 var roles = require('./routers/roles').router
 
 var app = express();
@@ -38,6 +39,7 @@ app.use(cors(corsOptions));
 app.use('/users', users)
 app.use('/roles', roles)
 app.use('/login', login)
+app.use('/logout', logout)
 
 app.listen(3001, () => {
     console.log('OK! Server started')

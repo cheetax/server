@@ -18,4 +18,5 @@ router.post('/', (req, res) => {
     res.json({ status: req.session.isAuthorized, user: req.session.user })
 })
 
+
 module.exports = router
