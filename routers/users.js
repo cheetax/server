@@ -106,7 +106,7 @@ var setUsers = () => {
         //     salt: crypto.randomBytes(32)
         // })
     }
-    console.log(users)
+   // console.log(users)
 };
 
 setUsers();
