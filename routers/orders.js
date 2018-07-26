@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router()
 
-var orders = [];    
+var orders = [];
 const uid = () => "id" + Math.random().toString(16).slice(2);
 
 router.get('/', (req, res) => {
@@ -16,13 +16,25 @@ router.get('/', (req, res) => {
 
 router.post('/filter', (req, res) => {
     //console.log(req.session);
-    var filter = req.body;
-    orders = orders.filter(item => item.user.id !== filter.user.id);
-    var response = {
-        status: true,
-        orders: orders,
-    };
-    if (req.session.isAuthorized) res.json(response);
+    if (req.session.isAuthorized) {
+        var filter = req.body;
+        orders = orders.filter(item => {
+            var resultUser = true;
+            var resultData = true;
+            if (filter.user) {
+                resultUser = item.userID !== filter.user.id
+            }
+            if (filter.data) {
+                resultData = (item.data >= filter.dataIN && item.data <= filter.dataOUT)
+            }
+            return (resultUser && resultData)
+        });
+        var response = {
+            status: true,
+            orders: orders,
+        };
+        res.json(response);
+    }
     else res.json({ status: false });
 })
 
@@ -33,7 +45,7 @@ router.post('/', (req, res) => {
         var order = req.body;
 
         order.id = uid();
-        
+
         orders.push(order);
         var response = {
             status: true,
@@ -51,7 +63,7 @@ router.put('/', (req, res) => {
 
         orders = orders.map(item => {
             if (item.id !== order.id) return item;
-            else {                
+            else {
                 return order;
             }
         })
@@ -81,5 +93,5 @@ router.delete('/', (req, res) => {
 })
 
 module.exports = {
-    router,    
+    router,
 }
