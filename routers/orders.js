@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
     else res.json({ status: false });
 })
 
+router.post('/filter', (req, res) => {
+    //console.log(req.session);
+    var filter = req.body;
+    orders = orders.filter(item => item.user.id !== filter.user.id);
+    var response = {
+        status: true,
+        orders: orders,
+    };
+    if (req.session.isAuthorized) res.json(response);
+    else res.json({ status: false });
+})
+
 router.post('/', (req, res) => {
 
     if (req.session.isAuthorized) {
@@ -25,7 +37,7 @@ router.post('/', (req, res) => {
         orders.push(order);
         var response = {
             status: true,
-            orders: order,
+            orders: orders,
         }
         res.json(response)
     }

@@ -9,6 +9,7 @@ var users = require('./routers/users').router
 var login = require('./routers/login')
 var logout = require('./routers/logout')
 var roles = require('./routers/roles').router
+var orders = require('./routers/orders').router
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use('/users', users)
 app.use('/roles', roles)
 app.use('/login', login)
 app.use('/logout', logout)
+app.use('/orders', orders)
 
 app.listen(3001, () => {
     console.log('OK! Server started')
